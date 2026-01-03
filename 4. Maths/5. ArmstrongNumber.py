@@ -1,1 +1,1 @@
-num = input("Enter the no. ")
+num = input("Enter the no.")
