@@ -3,6 +3,6 @@ def PrintNumber(Lrange, Urange):
     if Lrange > Urange:
         return
     PrintNumber(Lrange + 1, Urange)
-    print(Lrange)
+    print(Lrange,Urange)
 
 PrintNumber(1,10)
