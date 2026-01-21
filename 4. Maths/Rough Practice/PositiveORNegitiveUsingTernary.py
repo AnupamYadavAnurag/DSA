@@ -1,5 +1,4 @@
-num = int(input("Enter a number: "))
+num = int(input("Enter the number "))
+print("positive" if num > 0 else "Negative")
 
-result = "Positive" if num > 0 else "Negative"
-print(result)
 
