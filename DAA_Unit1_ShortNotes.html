@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DAA Unit 1 – Short Notes</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;500&family=Lato:wght@300;400;700&display=swap');
+
+  :root {
+    --bg: #0d0f14;
+    --card: #141720;
+    --border: #22283a;
+    --accent1: #7c6aff;
+    --accent2: #38d9a9;
+    --accent3: #f5a623;
+    --accent4: #ff6b6b;
+    --text: #e2e8f0;
+    --muted: #8899aa;
+    --tag-bg: #1e2535;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Lato', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    padding: 2rem 1rem 4rem;
+  }
+
+  .container { max-width: 900px; margin: 0 auto; }
+
+  header {
+    text-align: center;
+    padding: 3rem 0 2.5rem;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 2.5rem;
+  }
+
+  header .label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    color: var(--accent2);
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+  }
+
+  header h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 800;
+    background: linear-gradient(120deg, var(--accent1), var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  header p {
+    margin-top: 0.75rem;
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+
+  .toc {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .toc h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent3);
+    margin-bottom: 1rem;
+  }
+
+  .toc ul {
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.4rem 1rem;
+  }
+
+  .toc ul li a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.88rem;
+    font-family: 'IBM Plex Mono', monospace;
+    transition: color 0.2s;
+  }
+
+  .toc ul li a:hover { color: var(--accent1); }
+
+  section {
+    margin-bottom: 2.5rem;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--accent2);
+    background: rgba(56,217,169,0.1);
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    letter-spacing: 0.1em;
+  }
+
+  .section-header h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--text);
+  }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .card h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--accent1);
+    margin-bottom: 0.75rem;
+  }
+
+  .card p, .card li {
+    font-size: 0.92rem;
+    color: #c8d0dc;
+    margin-bottom: 0.35rem;
+  }
+
+  .card ul, .card ol {
+    padding-left: 1.25rem;
+  }
+
+  .card li { list-style: disc; }
+
+  .highlight {
+    border-left: 3px solid var(--accent1);
+    padding-left: 1rem;
+  }
+
+  .grid2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .tag {
+    display: inline-block;
+    background: var(--tag-bg);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 0.15rem 0.5rem;
+    font-size: 0.75rem;
+    font-family: 'IBM Plex Mono', monospace;
+    color: var(--accent3);
+    margin-right: 0.3rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .complexity-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+    font-family: 'IBM Plex Mono', monospace;
+    margin-top: 0.75rem;
+  }
+
+  .complexity-table th {
+    background: rgba(124,106,255,0.15);
+    color: var(--accent1);
+    padding: 0.5rem 0.75rem;
+    text-align: left;
+    font-weight: 600;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .complexity-table td {
+    padding: 0.5rem 0.75rem;
+    border-bottom: 1px solid #1a2030;
+    color: #c0ccd8;
+  }
+
+  .complexity-table tr:last-child td { border-bottom: none; }
+
+  .best { color: var(--accent2) !important; }
+  .avg  { color: var(--accent3) !important; }
+  .worst { color: var(--accent4) !important; }
+
+  .compare-box {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .compare-col {
+    padding: 1.25rem;
+  }
+
+  .compare-col:first-child {
+    border-right: 1px solid var(--border);
+    background: rgba(124,106,255,0.05);
+  }
+
+  .compare-col:last-child {
+    background: rgba(56,217,169,0.04);
+  }
+
+  .compare-col h4 {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+  }
+
+  .compare-col:first-child h4 { color: var(--accent1); }
+  .compare-col:last-child h4 { color: var(--accent2); }
+
+  .compare-col li {
+    font-size: 0.85rem;
+    color: #b0bcc8;
+    margin-bottom: 0.35rem;
+    list-style: disc;
+    margin-left: 1.1rem;
+  }
+
+  .notation-box {
+    background: rgba(0,0,0,0.3);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem 1.25rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .notation-box .notation-name {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: 0.4rem;
+  }
+
+  .formula {
+    font-family: 'IBM Plex Mono', monospace;
+    background: rgba(124,106,255,0.12);
+    border: 1px solid rgba(124,106,255,0.25);
+    border-radius: 6px;
+    padding: 0.5rem 0.85rem;
+    font-size: 0.85rem;
+    color: #d0caff;
+    margin: 0.5rem 0;
+    display: block;
+  }
+
+  .important-badge {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    background: rgba(245,166,35,0.15);
+    color: var(--accent3);
+    border: 1px solid rgba(245,166,35,0.3);
+    padding: 0.15rem 0.45rem;
+    border-radius: 4px;
+    letter-spacing: 0.1em;
+    vertical-align: middle;
+    margin-left: 0.5rem;
+  }
+
+  @media (max-width: 600px) {
+    .grid2, .compare-box { grid-template-columns: 1fr; }
+    .compare-col:first-child { border-right: none; border-bottom: 1px solid var(--border); }
+    .toc ul { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <div class="label">Design &amp; Analysis of Algorithms</div>
+    <h1>Unit 1 — Short Notes</h1>
+    <p>Vikas Mishra &nbsp;|&nbsp; Key concepts for exam preparation</p>
+  </header>
+
+  <!-- TOC -->
+  <div class="toc">
+    <h2>Contents</h2>
+    <ul>
+      <li><a href="#s1">1. Algorithm Basics</a></li>
+      <li><a href="#s2">2. Algorithm Techniques</a></li>
+      <li><a href="#s3">3. Analysis &amp; Complexity</a></li>
+      <li><a href="#s4">4. Asymptotic Notations</a></li>
+      <li><a href="#s5">5. Recurrence Relations</a></li>
+      <li><a href="#s6">6. Sorting: Basics</a></li>
+      <li><a href="#s7">7. Comparison-Based Sorts</a></li>
+      <li><a href="#s8">8. Non-Comparison Sorts</a></li>
+      <li><a href="#s9">9. Quick Sort &amp; Merge Sort</a></li>
+    </ul>
+  </div>
+
+  <!-- SECTION 1 -->
+  <section id="s1">
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <h2>Algorithm Basics</h2>
+    </div>
+
+    <div class="card highlight">
+      <h3>Definition <span class="important-badge">EXAM</span></h3>
+      <p>A well-defined computational procedure that takes input(s) and produces output(s) — a blueprint/sequence of steps transforming input into output.</p>
+    </div>
+
+    <div class="card">
+      <h3>5 Characteristics (Input-Output-FDE)</h3>
+      <ul>
+        <li><strong>Input</strong> – 0 or more inputs</li>
+        <li><strong>Output</strong> – at least 1 output</li>
+        <li><strong>Finiteness</strong> – must stop after finite steps</li>
+        <li><strong>Definiteness</strong> – each step precisely defined, no ambiguity</li>
+        <li><strong>Effectiveness</strong> – steps must be effective enough to solve the problem</li>
+      </ul>
+    </div>
+
+    <div class="grid2">
+      <div class="card">
+        <h3>Algorithm vs Program</h3>
+        <ul>
+          <li>Algorithm: informal, design phase, H/W independent</li>
+          <li>Program: predefined syntax, coding phase, H/W dependent</li>
+          <li>Algorithm → Analysis (efficiency); Program → Testing (correctness)</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Pseudo Code</h3>
+        <ul>
+          <li>High-level description without strict syntax</li>
+          <li>Intermediary between algorithm &amp; program</li>
+          <li>Uses indentation, // for comments, standard loop constructs</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Priori vs Posteriori Analysis <span class="important-badge">EXAM</span></h3>
+      <div class="compare-box" style="border:none; gap:0.75rem; display:grid; grid-template-columns:1fr 1fr;">
+        <div style="background:rgba(124,106,255,0.07); padding:1rem; border-radius:8px; border:1px solid var(--border);">
+          <strong style="color:var(--accent1)">A Priori (Before execution)</strong>
+          <ul style="padding-left:1.1rem; margin-top:0.5rem;">
+            <li style="font-size:0.85rem; color:#b0bcc8; list-style:disc; margin-bottom:0.3rem;">Theoretical, machine-independent</li>
+            <li style="font-size:0.85rem; color:#b0bcc8; list-style:disc; margin-bottom:0.3rem;">Uses asymptotic notations</li>
+            <li style="font-size:0.85rem; color:#b0bcc8; list-style:disc; margin-bottom:0.3rem;">Gives approximate answer</li>
+            <li style="font-size:0.85rem; color:#b0bcc8; list-style:disc;">Credit to programmer if fast</li>
+          </ul>
+        </div>
+        <div style="background:rgba(56,217,169,0.05); padding:1rem; border-radius:8px; border:1px solid var(--border);">
+          <strong style="color:var(--accent2)">Posteriori (After execution)</strong>
+          <ul style="padding-left:1.1rem; margin-top:0.5rem;">
+            <li style="font-size:0.85rem; color:#b0bcc8; list-style:disc; margin-bottom:0.3rem;">Practical, machine-dependent</li>
+            <li style="font-size:0.85rem; color:#b0bcc8; list-style:disc; margin-bottom:0.3rem;">Does NOT use asymptotic notations</li>
+            <li style="font-size:0.85rem; color:#b0bcc8; list-style:disc; margin-bottom:0.3rem;">Gives exact answer</li>
+            <li style="font-size:0.85rem; color:#b0bcc8; list-style:disc;">Credit to compiler/hardware</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 2 -->
+  <section id="s2">
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <h2>Algorithm Techniques</h2>
+    </div>
+
+    <div class="grid2">
+      <div class="card">
+        <h3>Divide &amp; Conquer</h3>
+        <ul>
+          <li><strong>Divide:</strong> Split into sub-problems</li>
+          <li><strong>Conquer:</strong> Solve recursively</li>
+          <li><strong>Combine:</strong> Merge solutions</li>
+          <li>Examples: Merge Sort, Quick Sort, Binary Search</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Greedy Method</h3>
+        <ul>
+          <li>Makes locally optimal choice at each step</li>
+          <li>Used for optimization problems</li>
+          <li>No guarantee of global optimal in all cases</li>
+          <li>Feasible → Optimal → Greedy choice</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Dynamic Programming</h3>
+        <ul>
+          <li>Solves by breaking into sub-problems</li>
+          <li>Stores results (memoization) — avoids recomputation</li>
+          <li>Follows Principle of Optimality</li>
+          <li>Always gives optimal solution (considers all cases)</li>
+          <li>Reduces time: exponential → polynomial</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Backtracking</h3>
+        <ul>
+          <li>Brute force — tries all combinations</li>
+          <li>NOT suitable for optimization problems</li>
+          <li>Builds solution incrementally, removes failures</li>
+          <li>Uses state space tree + DFS exploration</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Branch &amp; Bound</h3>
+      <ul>
+        <li>Used for special optimization problems (NP-hard)</li>
+        <li>Like backtracking but uses BFS (breadth-first) on state space tree</li>
+        <li>Explores all permutations in worst case (exponential)</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>Greedy vs Dynamic Programming <span class="important-badge">EXAM</span></h3>
+      <div class="compare-box">
+        <div class="compare-col">
+          <h4>Greedy</h4>
+          <ul>
+            <li>Best-looking choice at each step</li>
+            <li>No guarantee of optimal solution</li>
+            <li>Faster, simpler</li>
+            <li>No reconsideration of past choices</li>
+          </ul>
+        </div>
+        <div class="compare-col">
+          <h4>Dynamic Programming</h4>
+          <ul>
+            <li>Decision considers all sub-problems</li>
+            <li>Always gives optimal solution</li>
+            <li>More memory/time overhead</li>
+            <li>Uses previously solved states</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 3 -->
+  <section id="s3">
+    <div class="section-header">
+      <span class="section-num">03</span>
+      <h2>Analysis &amp; Complexity</h2>
+    </div>
+
+    <div class="grid2">
+      <div class="card">
+        <h3>Time Complexity</h3>
+        <ul>
+          <li>Assumes every instruction costs same constant time</li>
+          <li>Total Time = Σ(N × C) for all instructions</li>
+          <li>Machine-independent measure</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Space Complexity</h3>
+        <ul>
+          <li><strong>Fixed Part:</strong> constants, simple variables, code</li>
+          <li><strong>Variable Part:</strong> dynamic structures, recursion stack</li>
+          <li>Space = Auxiliary Space + Input Space</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Cases of Analysis</h3>
+      <div style="display:flex; gap:1rem; flex-wrap:wrap; margin-top:0.5rem;">
+        <div style="flex:1; min-width:140px; background:rgba(56,217,169,0.07); padding:0.75rem; border-radius:8px; border:1px solid rgba(56,217,169,0.2);">
+          <div style="color:var(--accent2); font-weight:700; font-size:0.85rem; margin-bottom:0.3rem;">Best Case</div>
+          <div style="font-size:0.82rem; color:#b0bcc8;">Minimum steps for input size n — Big Ω</div>
+        </div>
+        <div style="flex:1; min-width:140px; background:rgba(245,166,35,0.07); padding:0.75rem; border-radius:8px; border:1px solid rgba(245,166,35,0.2);">
+          <div style="color:var(--accent3); font-weight:700; font-size:0.85rem; margin-bottom:0.3rem;">Average Case</div>
+          <div style="font-size:0.82rem; color:#b0bcc8;">Average steps for input size n — Big Θ</div>
+        </div>
+        <div style="flex:1; min-width:140px; background:rgba(255,107,107,0.07); padding:0.75rem; border-radius:8px; border:1px solid rgba(255,107,107,0.2);">
+          <div style="color:var(--accent4); font-weight:700; font-size:0.85rem; margin-bottom:0.3rem;">Worst Case</div>
+          <div style="font-size:0.82rem; color:#b0bcc8;">Maximum steps for input size n — Big O</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Growth Rates (Slowest → Fastest)</h3>
+      <span class="tag">O(1)</span>
+      <span class="tag">O(log n)</span>
+      <span class="tag">O(n)</span>
+      <span class="tag">O(n log n)</span>
+      <span class="tag">O(n²)</span>
+      <span class="tag">O(n³)</span>
+      <span class="tag">O(2ⁿ)</span>
+      <span class="tag">O(n!)</span>
+      <p style="margin-top:0.5rem; font-size:0.85rem; color:var(--muted);">Leading term (highest degree) defines the order of growth. e.g. T(n)=5n²+3n+5 → O(n²)</p>
+    </div>
+  </section>
+
+  <!-- SECTION 4 -->
+  <section id="s4">
+    <div class="section-header">
+      <span class="section-num">04</span>
+      <h2>Asymptotic Notations <span class="important-badge">EXAM</span></h2>
+    </div>
+
+    <div class="notation-box">
+      <div class="notation-name" style="color:var(--accent4)">Big O — O(g(n)) &nbsp; <small style="font-size:0.7rem; color:var(--muted)">UPPER BOUND / WORST CASE</small></div>
+      <p style="font-size:0.87rem; color:#b0bcc8;">f(n) ≤ c·g(n) for all n ≥ n₀, c > 0</p>
+      <code class="formula">f(n) = O(g(n)) → f never exceeds c·g(n) after n₀</code>
+      <p style="font-size:0.83rem; color:var(--muted);">Most widely used. Gives maximum time an algorithm may take.</p>
+    </div>
+
+    <div class="notation-box">
+      <div class="notation-name" style="color:var(--accent2)">Big Ω — Ω(g(n)) &nbsp; <small style="font-size:0.7rem; color:var(--muted)">LOWER BOUND / BEST CASE</small></div>
+      <p style="font-size:0.87rem; color:#b0bcc8;">f(n) ≥ c·g(n) for all n ≥ n₀, c > 0</p>
+      <code class="formula">f(n)=3n+2, g(n)=n → 3n+2 ≥ 1·n holds for c=1, n≥1 → f(n)=Ω(n)</code>
+    </div>
+
+    <div class="notation-box">
+      <div class="notation-name" style="color:var(--accent3)">Big Θ — Θ(g(n)) &nbsp; <small style="font-size:0.7rem; color:var(--muted)">TIGHT BOUND / AVERAGE CASE</small></div>
+      <p style="font-size:0.87rem; color:#b0bcc8;">c₁·g(n) ≤ f(n) ≤ c₂·g(n) for n ≥ n₀</p>
+      <code class="formula">f(n) bounded from above AND below by g(n)</code>
+      <p style="font-size:0.83rem; color:var(--muted);">e.g. f(n)=3n+2 → Θ(n) with c₁=1, c₂=4, n₀=2</p>
+    </div>
+
+    <div class="grid2">
+      <div class="card">
+        <h3>Little o &nbsp; <span style="font-size:0.8rem; color:var(--muted); font-weight:400;">loose upper bound</span></h3>
+        <p style="font-size:0.87rem; color:#b0bcc8;">f(n) = o(g(n)) means <code style="font-family:monospace; color:var(--accent2)">lim f(n)/g(n) = 0</code> as n→∞</p>
+        <p style="font-size:0.83rem; color:var(--muted); margin-top:0.3rem;">Not asymptotically tight; rough estimate of max growth.</p>
+      </div>
+      <div class="card">
+        <h3>Little ω &nbsp; <span style="font-size:0.8rem; color:var(--muted); font-weight:400;">loose lower bound</span></h3>
+        <p style="font-size:0.87rem; color:#b0bcc8;">f(n) = ω(g(n)) means <code style="font-family:monospace; color:var(--accent2)">lim f(n)/g(n) = ∞</code> as n→∞</p>
+        <p style="font-size:0.83rem; color:var(--muted); margin-top:0.3rem;">g(n) grows slower; not asymptotically tight lower bound.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 5 -->
+  <section id="s5">
+    <div class="section-header">
+      <span class="section-num">05</span>
+      <h2>Recurrence Relations</h2>
+    </div>
+
+    <div class="card">
+      <h3>General Form</h3>
+      <code class="formula">T(n) = O(1)  if n ≤ c<br>T(n) = aT(n/b) + D(n) + C(n)  otherwise</code>
+      <p style="font-size:0.85rem; color:var(--muted); margin-top:0.5rem;">Where a = no. of sub-problems, b = factor size reduction, D(n) = divide cost, C(n) = combine cost</p>
+    </div>
+
+    <div class="grid2">
+      <div class="card">
+        <h3>Substitution Method</h3>
+        <ul>
+          <li>Guess a bound → Prove by induction</li>
+          <li>Works when guessing form is simple</li>
+          <li>Example: T(n) = 2T(n/2)+n → O(n log n)</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Iteration / Backward Sub.</h3>
+        <ul>
+          <li>Expand recurrence until base case</li>
+          <li>Express as summation of terms</li>
+          <li>Example: T(n) = T(n-1)+1 → O(n)</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Recursion Tree Method</h3>
+        <ul>
+          <li>Visualize recurrence as a tree</li>
+          <li>Sum cost at each level → total cost</li>
+          <li>Best for generating a good guess</li>
+          <li>Disadvantage: prone to error for complex cases</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Master's Theorem <span class="important-badge">EXAM</span></h3>
+        <p style="font-size:0.85rem; color:#b0bcc8;">For T(n) = aT(n/b) + f(n):</p>
+        <ul style="margin-top:0.4rem;">
+          <li>If f(n) = O(n<sup>log_b(a)-ε</sup>) → T(n) = Θ(n<sup>log_b a</sup>)</li>
+          <li>If f(n) = Θ(n<sup>log_b a</sup>) → T(n) = Θ(n<sup>log_b a</sup> log n)</li>
+          <li>If f(n) = Ω(n<sup>log_b(a)+ε</sup>) → T(n) = Θ(f(n))</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 6 -->
+  <section id="s6">
+    <div class="section-header">
+      <span class="section-num">06</span>
+      <h2>Sorting — Basics</h2>
+    </div>
+
+    <div class="card">
+      <h3>Key Sorting Concepts <span class="important-badge">EXAM</span></h3>
+      <ul>
+        <li><strong>In-place:</strong> Uses O(1) extra space. Examples: Bubble, Selection, Insertion, Heap Sort</li>
+        <li><strong>Stable:</strong> Equal elements maintain original order. Examples: Merge, Insertion, Bubble, Counting</li>
+        <li><strong>Unstable:</strong> Order of equal elements not guaranteed. Examples: Quick, Heap, Shell Sort</li>
+        <li><strong>Internal:</strong> All data fits in memory</li>
+        <li><strong>External:</strong> Data too large for memory (e.g., Merge Sort)</li>
+        <li><strong>Comparison-based:</strong> Compares elements (Bubble, Insertion, Merge, Quick, Heap)</li>
+        <li><strong>Non-comparison:</strong> Does not compare elements (Counting, Radix, Bucket)</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- SECTION 7 -->
+  <section id="s7">
+    <div class="section-header">
+      <span class="section-num">07</span>
+      <h2>Comparison-Based Sorting</h2>
+    </div>
+
+    <div class="card">
+      <h3>Insertion Sort</h3>
+      <ul>
+        <li>Like sorting playing cards in hand</li>
+        <li>Array split into sorted + unsorted; pick from unsorted, insert in correct position in sorted</li>
+        <li>Stable, In-place, Adaptive</li>
+      </ul>
+      <table class="complexity-table">
+        <tr><th>Case</th><th>Time</th><th>Space</th></tr>
+        <tr><td>Best</td><td class="best">O(n)</td><td rowspan="3">O(1)</td></tr>
+        <tr><td>Average</td><td class="avg">O(n²)</td></tr>
+        <tr><td>Worst</td><td class="worst">O(n²)</td></tr>
+      </table>
+    </div>
+
+    <div class="card">
+      <h3>Heap Sort</h3>
+      <ul>
+        <li>Build Max-Heap → repeatedly remove root, place at end</li>
+        <li>Not stable; In-place</li>
+        <li>Complete binary tree property used</li>
+        <li>Left child at 2i+1, Right child at 2i+2</li>
+      </ul>
+      <table class="complexity-table">
+        <tr><th>Case</th><th>Time</th><th>Space</th></tr>
+        <tr><td>All cases</td><td class="avg">O(n log n)</td><td>O(1)</td></tr>
+      </table>
+    </div>
+
+    <div class="card">
+      <h3>Shell Sort</h3>
+      <ul>
+        <li>Optimization of Insertion Sort — sorts elements far apart first, reduces gap gradually</li>
+        <li>Gap sequence: n/2, n/4…1 (basic) or Knuth's formula: h = 3h+1</li>
+        <li>First algorithm to break O(n²) barrier</li>
+        <li>Not stable; In-place</li>
+      </ul>
+      <table class="complexity-table">
+        <tr><th>Case</th><th>Time</th><th>Space</th></tr>
+        <tr><td>Best</td><td class="best">O(n log n)</td><td rowspan="3">O(1)</td></tr>
+        <tr><td>Average</td><td class="avg">O(n^1.25–n^1.5)</td></tr>
+        <tr><td>Worst</td><td class="worst">O(n²)</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- SECTION 8 -->
+  <section id="s8">
+    <div class="section-header">
+      <span class="section-num">08</span>
+      <h2>Non-Comparison Sorting</h2>
+    </div>
+
+    <div class="card">
+      <h3>Counting Sort <span class="important-badge">EXAM</span></h3>
+      <ul>
+        <li>Works when range (k) is small compared to n</li>
+        <li>Count frequency → cumulative count → place in output → stable</li>
+        <li>External sort — assumes integer inputs in range [0, k]</li>
+      </ul>
+      <code class="formula">Steps: Count → Cumulate → Place (reverse traversal for stability)</code>
+      <table class="complexity-table">
+        <tr><th>Case</th><th>Time</th><th>Space</th></tr>
+        <tr><td>All cases</td><td class="best">O(n + k)</td><td>O(n + k)</td></tr>
+      </table>
+    </div>
+
+    <div class="card">
+      <h3>Radix Sort</h3>
+      <ul>
+        <li>Sort digit by digit — Least Significant Digit (LSD) to Most Significant Digit (MSD)</li>
+        <li>Uses Counting Sort internally at each digit</li>
+        <li>Add leading zeros to equalize digit count</li>
+      </ul>
+      <table class="complexity-table">
+        <tr><th>Complexity</th><th>Value</th></tr>
+        <tr><td>Time</td><td class="best">O(d × (n + b))</td></tr>
+        <tr><td colspan="2" style="font-size:0.8rem; color:var(--muted);">d = digits, n = elements, b = base (10 for decimal)</td></tr>
+      </table>
+    </div>
+
+    <div class="card">
+      <h3>Bucket Sort</h3>
+      <ul>
+        <li>Divides into n buckets → sort each bucket (using Insertion Sort) → concatenate</li>
+        <li>Works well for uniformly distributed floats in [0,1)</li>
+        <li>Stable (because Insertion Sort is stable)</li>
+        <li>bucket index = floor(n × element)</li>
+      </ul>
+      <table class="complexity-table">
+        <tr><th>Case</th><th>Time</th><th>Space</th></tr>
+        <tr><td>Best</td><td class="best">O(n + k)</td><td rowspan="2">O(n + k)</td></tr>
+        <tr><td>Worst (all in 1 bucket)</td><td class="worst">O(n²)</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- SECTION 9 -->
+  <section id="s9">
+    <div class="section-header">
+      <span class="section-num">09</span>
+      <h2>Quick Sort &amp; Merge Sort</h2>
+    </div>
+
+    <div class="card">
+      <h3>Quick Sort <span class="important-badge">EXAM</span></h3>
+      <ul>
+        <li>Divide &amp; Conquer: choose pivot → partition → recurse left &amp; right</li>
+        <li>Elements &lt; pivot → left; elements &gt; pivot → right</li>
+        <li>Pivot strategies: first, last, random, median</li>
+        <li>Not stable; In-place; Cache-friendly; Tail-recursive</li>
+        <li>Most common: last element as pivot (PARTITION algorithm)</li>
+      </ul>
+      <table class="complexity-table">
+        <tr><th>Case</th><th>Time</th><th>Space</th></tr>
+        <tr><td>Best (equal split)</td><td class="best">Ω(n log n)</td><td class="best">O(log n)</td></tr>
+        <tr><td>Average</td><td class="avg">Θ(n log n)</td><td class="avg">O(log n)</td></tr>
+        <tr><td>Worst (sorted array)</td><td class="worst">O(n²)</td><td class="worst">O(n)</td></tr>
+      </table>
+      <p style="margin-top:0.6rem; font-size:0.82rem; color:var(--muted);">Worst case: smallest/largest always chosen as pivot (e.g., already sorted array).</p>
+    </div>
+
+    <div class="card">
+      <h3>Merge Sort <span class="important-badge">EXAM</span></h3>
+      <ul>
+        <li>Divide &amp; Conquer: split in half → sort each half → merge</li>
+        <li>Stable, but NOT in-place (needs O(n) extra space)</li>
+        <li>Best for linked lists, external sorting, parallel processing</li>
+        <li>merge() function merges two sorted halves: A[l..m] and A[m+1..r]</li>
+      </ul>
+      <table class="complexity-table">
+        <tr><th>Case</th><th>Time</th><th>Space</th></tr>
+        <tr><td>All cases</td><td class="best">O(n log n)</td><td class="avg">O(n)</td></tr>
+      </table>
+    </div>
+
+    <div class="card">
+      <h3>Quick Sort vs Merge Sort <span class="important-badge">EXAM</span></h3>
+      <div class="compare-box">
+        <div class="compare-col">
+          <h4>Quick Sort</h4>
+          <ul>
+            <li>In-place (O(log n) stack)</li>
+            <li>Not stable</li>
+            <li>Cache-friendly</li>
+            <li>Worst: O(n²) on sorted input</li>
+            <li>Faster in practice (general use)</li>
+          </ul>
+        </div>
+        <div class="compare-col">
+          <h4>Merge Sort</h4>
+          <ul>
+            <li>NOT in-place (O(n) extra)</li>
+            <li>Stable</li>
+            <li>Less cache-friendly</li>
+            <li>Guaranteed O(n log n)</li>
+            <li>Better for linked lists &amp; external sort</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Master summary table -->
+    <div class="card">
+      <h3>Complete Complexity Summary <span class="important-badge">EXAM</span></h3>
+      <table class="complexity-table">
+        <tr>
+          <th>Algorithm</th>
+          <th>Best</th>
+          <th>Average</th>
+          <th>Worst</th>
+          <th>Space</th>
+          <th>Stable</th>
+        </tr>
+        <tr>
+          <td>Insertion Sort</td>
+          <td class="best">O(n)</td>
+          <td class="avg">O(n²)</td>
+          <td class="worst">O(n²)</td>
+          <td>O(1)</td>
+          <td style="color:var(--accent2)">✓</td>
+        </tr>
+        <tr>
+          <td>Heap Sort</td>
+          <td class="best">O(n log n)</td>
+          <td class="avg">O(n log n)</td>
+          <td class="worst">O(n log n)</td>
+          <td>O(1)</td>
+          <td style="color:var(--accent4)">✗</td>
+        </tr>
+        <tr>
+          <td>Shell Sort</td>
+          <td class="best">O(n log n)</td>
+          <td class="avg">O(n^1.25)</td>
+          <td class="worst">O(n²)</td>
+          <td>O(1)</td>
+          <td style="color:var(--accent4)">✗</td>
+        </tr>
+        <tr>
+          <td>Quick Sort</td>
+          <td class="best">O(n log n)</td>
+          <td class="avg">O(n log n)</td>
+          <td class="worst">O(n²)</td>
+          <td>O(log n)</td>
+          <td style="color:var(--accent4)">✗</td>
+        </tr>
+        <tr>
+          <td>Merge Sort</td>
+          <td class="best">O(n log n)</td>
+          <td class="avg">O(n log n)</td>
+          <td class="worst">O(n log n)</td>
+          <td>O(n)</td>
+          <td style="color:var(--accent2)">✓</td>
+        </tr>
+        <tr>
+          <td>Counting Sort</td>
+          <td class="best">O(n+k)</td>
+          <td class="avg">O(n+k)</td>
+          <td class="worst">O(n+k)</td>
+          <td>O(n+k)</td>
+          <td style="color:var(--accent2)">✓</td>
+        </tr>
+        <tr>
+          <td>Radix Sort</td>
+          <td class="best">O(d(n+b))</td>
+          <td class="avg">O(d(n+b))</td>
+          <td class="worst">O(d(n+b))</td>
+          <td>O(n+b)</td>
+          <td style="color:var(--accent2)">✓</td>
+        </tr>
+        <tr>
+          <td>Bucket Sort</td>
+          <td class="best">O(n+k)</td>
+          <td class="avg">O(n+k)</td>
+          <td class="worst">O(n²)</td>
+          <td>O(n+k)</td>
+          <td style="color:var(--accent2)">✓</td>
+        </tr>
+      </table>
+    </div>
+  </section>
+
+  <footer style="text-align:center; padding:2rem 0; color:var(--muted); font-size:0.8rem; border-top:1px solid var(--border); margin-top:1rem;">
+    DAA Unit 1 Short Notes &nbsp;|&nbsp; Vikas Mishra &nbsp;|&nbsp; For exam use only
+  </footer>
+
+</div>
+</body>
+</html>
