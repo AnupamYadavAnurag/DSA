@@ -10,4 +10,5 @@ for i in range(1, n):
         j -= 1
         arr[j + 1] = key
 
-print("Sorted array:", arr)
+print("Sorted array:")
+print(arr)
