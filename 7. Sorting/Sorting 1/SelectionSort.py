@@ -10,5 +10,10 @@ for i in range(n):
             
     arr[i], arr[min_index] = arr[min_index], arr[i]
 
+<<<<<<< HEAD
 print("Sorted array:", arr)
 vh
+=======
+print("Sorted array:")
+print(arr)
+>>>>>>> 6c934a14923062a35da1a948241af9f98ef99c01
