@@ -11,3 +11,4 @@ for i in range(n):
     arr[i], arr[min_index] = arr[min_index], arr[i]
 
 print("Sorted array:", arr)
+vh
